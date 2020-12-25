@@ -1,0 +1,22 @@
+wi-fi termostat
+
+Status: is used, updated;
+Designed for paired control of gas and wood boilers
+
+Control is carried out by means of 6 temperature sensors which are located on 1 bus
+The device contains a real-time module for the operation of the weekly programmer of the gas boiler
+Control of a wood boiler consists in management of 2 pumps of contours
+You can configure the weekly programmer and change the settings using the 5 touch buttons on the device
+Namely technical adjustment of thermal parameters, choice of wi-fi network, password, purpose of temperature sensors and correction of their data
+As well as setting the time, token to access the blynk service for remote management
+All parameters can be written to flash memory.
+
+I want to note this nuance
+Automation is located near the airfield, and sensors are mounted on long wires.
+The sensors were unstable and even failed. Surprisingly, the principle of dynamic zeroing of the sensor bus solved this problem.
+
+ESP32
+ds3231
+ds18b20
+LCD1602
+
