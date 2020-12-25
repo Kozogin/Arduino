@@ -1,0 +1,6 @@
+My project Arduino
+
+I like to do practical projects.
+Such a project as thermostats to control boilers remotely, LED lamp with remote control or from the phone.
+Simple clock with time transition, there is an unfinished project of a double relay for control via SMS, gps traker
+
