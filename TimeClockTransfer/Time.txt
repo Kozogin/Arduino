@@ -1,0 +1,10 @@
+wi-fi termostat
+
+Status: is used;
+
+Just a clock with a translation of time
+
+Arduino nano
+ds3231
+ds18b20
+
