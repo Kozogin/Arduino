@@ -1,0 +1,20 @@
+SMS Double relay
+
+Status: not used, unfinished.
+
+The purpose of the device is to turn on the active load (up to 3 kW) with weekly programming.
+Settings are sent via SMS. Namely the setting number, switch-on time, switch-off time. 6 parameters are distributed so 3 weekdays, 2 Saturday, 1 Sunday.
+Separately for each relay.
+Setting the system clock, turning on the evening presence mode (with pseudo RND on), and in the same way.
+RND mode is alternative.
+If at the end of the message there is a word back, the sender is returned an SMS where the type of mode and its parameters are specified. This applies to the time setting
+On the Arduino uno (8 bit 2kbt RAM), of which 256 b was taken to the UART buffer, there was not enough memory to handle String. 
+So I rewrote the methods written in Visual Studio, where everything worked
+the SMS is written to the EEPROM and then processed.
+
+
+
+
+
+
+
