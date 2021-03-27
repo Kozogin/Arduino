@@ -1800,11 +1800,11 @@ void menuset(MenuTools &onpump1, MenuTools &onpump2, MenuTools &offpump1, MenuTo
     }
     if (pinsetting.getactualname() == "2222")
     {
-      tokenblynk.setnamelogin("vIMbChC4VCULuMHnt1z57NU6pQsR2M4i");
+      tokenblynk.setnamelogin("####ChC4VCULuMHnt1z57NU6pQsR2M4i");
     }
     if (pinsetting.getactualname() == "9999")
     {
-      tokenblynk.setnamelogin("4429c3dc3ae0445ba3b6023897401155");
+      tokenblynk.setnamelogin("####c3dc3ae0445ba3b6023897401155");
     }
     break;
   case 21:
