@@ -1,0 +1,143 @@
+<!DOCTYPE html> <html>
+ <html lang="en">
+ <head>
+  <meta charset="UTF-8">
+ 
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+ <title>Alarm</title>
+ <style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}
+
+    body{margin-top: 20px;background-color: #333;}
+    table {color: #888;margin: 10px auto 30px;} 
+    h1 {color: #888;margin: 10px auto 30px;}     
+    h3 {color: #888;margin-bottom: 30px; padding-bottom: 10px; padding-right: 30px ;}
+
+    .owner_ckd{padding: 10px 20px; margin: 0px auto 35px; background-color: #248c9c; }
+    .owner {display: inline;width: 190px;background-color: #945c0c;border: none;color: white;padding: 10px 30px;text-decoration: none;font-size: 20px;margin: 0px auto 35px;cursor: pointer;border-radius: 4px;}    
+    #post {display: block;width: 200px;background-color: #992121;border: none;color: white;padding: 13px 30px;text-decoration: none;font-size: 25px;margin: 0px auto 35px;cursor: pointer;border-radius: 4px;}
+    
+  </style>
+ </head>
+  <body>
+  <h1>Сигналізація</h1> 
+
+ <form action='/' method='POST'>
+
+  <table>
+    <caption><h2>Номери власників +380 (--)- -- --</h2></caption>
+    <tr>  
+      <th></th>  
+      <th></th> 
+      <th></th> 
+     </tr>    
+    <tr>  
+     <td></td>  
+     <td></td> 
+     <td>call back</td> 
+    </tr>
+    <tr>
+      <td><h3>telephone main</h3></td>
+      <td><input type='input' id='owner1' class='owner' name='owner1' value='' ></td>       
+      <td><input type='checkbox' id='owner1_ckd' class='owner_ckd' name='owner1_ckd' ></td>     
+    </tr>
+    <tr>
+      <td><h3>telephone owner 2</h3></td>
+      <td><input type='input' id='owner2' class='owner' name='owner2'></td>
+      <td><input type='checkbox' id='owner2_ckd' class='owner_ckd' name='owner2_ckd' ></td>
+    </tr>
+    <tr>
+      <td><h3>telephone owner 3</h3></td>
+      <td><input type='input' id='owner3' class='owner' name='owner3'></td>
+      <td><input type='checkbox' id='owner3_ckd' class='owner_ckd' name='owner3_ckd' ></td>
+    </tr>
+    <tr>
+      <td><h3>telephone owner 4</h3></td>
+      <td><input type='input' id='owner4' class='owner' name='owner4'></td>
+      <td><input type='checkbox' id='owner4_ckd' class='owner_ckd' name='owner4_ckd' ></td>
+    </tr>
+    <tr>
+      <td><h3>telephone owner 5</h3></td>
+      <td><input type='input' id='owner5' class='owner' name='owner5'></td>
+      <td><input type='checkbox' id='owner5_ckd' class='owner_ckd' name='owner5_ckd' ></td>
+    </tr>
+    <tr>
+      <td><h3>telephone owner 6</h3></td>
+      <td><input type='input' id='owner6' class='owner' name='owner6'></td>
+      <td><input type='checkbox' id='owner6_ckd' class='owner_ckd' name='owner6_ckd' ></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><h2>Залишок рахунку</h2></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><h3>telephone code</h3></td>
+      <td><input type='input' id='uss' class='owner' name='uss' value='*111#'></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><h3>залишок рахунку</h3></td>
+      <td><input type='number' id='uss_sum' class='owner' name='uss_sum' value='5' min='1' max='50'></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><h2>Зони</h2></td>      
+      <td></td>
+    </tr>
+    <tr>
+      <td><h3>zona name 1</h3></td>
+      <td><input type='input' id='zona1' class='owner' name='zona1' value='zona1'></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><h3>zona name 2</h3></td>
+      <td><input type='input' id='zona2' class='owner' name='zona2' value='zona2'></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><h3>zona name 3</h3></td>
+      <td><input type='input' id='zona3' class='owner' name='zona3' value='zona3'></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><h3>zona name 4</h3></td>
+      <td><input type='input' id='zona4' class='owner' name='zona4' value='zona4'></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><h3>zona name 5</h3></td>
+      <td><input type='input' id='zona5' class='owner' name='zona5' value='zona5'></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td><h2>Password</h2></td>      
+      <td></td>
+    </tr>
+    <tr>
+      <td><h3>password</h3></td>
+      <td><input type='input' id='password' class='owner' name='password' value='password'></td>
+      <td></td>
+    </tr>
+
+
+
+
+   </table>
+
+   <h3>really change</h3>
+   <input type='checkbox' id='really_ckd' class='owner_ckd' name='really_ckd' >
+   
+  <br><INPUT TYPE='submit' id='post' VALUE='save'><br><br>
+ </form>
+  <br> <br> <br> <br> <br> 
+
+ </body>
+ </html>
