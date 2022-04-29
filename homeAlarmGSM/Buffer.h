@@ -7,9 +7,9 @@
 class Buffer
 {
 private:
-    char inChar1; 
-    char inChar2;
-    std::string messageGsm;  
+    char inChar1 = ' '; 
+    char inChar2 = ' ';
+    std::string messageGsm = "";  
 
 public:
 
@@ -19,17 +19,22 @@ public:
 
     void bufferRead()
     {
-        while (SerialAT.available())
-        {
-            inChar1 = SerialAT.read();
-            SerialMon.write(inChar1);
-            messageGsm += inChar1;
+        try{
+            while (SerialAT.available())
+            {
+                inChar1 = SerialAT.read();
+                SerialMon.write(inChar1);
+                messageGsm += inChar1;
+            }
+            while (SerialMon.available())
+            {
+                inChar2 = SerialMon.read();
+                SerialAT.write(inChar2);
+            }
         }
-        while (SerialMon.available())
-        {
-            inChar2 = SerialMon.read();
-            SerialAT.write(inChar2);
-        }
+		catch (...)
+		{
+		}
     }
 
     void resetMessageGsm(){

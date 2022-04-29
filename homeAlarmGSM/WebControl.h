@@ -2,6 +2,7 @@
 #define WEB_CONTROL_H
 
 #include "state.h"
+#include <EEPROM.h>
 
 class WebContlol{
 
@@ -30,13 +31,17 @@ private:
     char zona4Tel[14];
     char zona5Tel[14];
 
+    char password[14];
+
 public:
     WebContlol(){}
-
 
 String getPage(){
 
 String ptr = "<!DOCTYPE html> <html>\n";
+
+try{
+
   ptr += "<html lang=\"en\">\n";
   ptr += "<head>\n";
   ptr += "<meta charset=\"UTF-8\">\n";
@@ -154,6 +159,18 @@ String ptr = "<!DOCTYPE html> <html>\n";
       ptr += "<td><input type='input' id='zona5' class='owner' name='zona5' value='" + (String)zona5Tel + "'></td>\n";
       ptr += "<td></td>\n";
     ptr += "</tr>\n";
+
+    ptr += "<tr>\n";
+      ptr += "<td></td>\n";
+      ptr += "<td><h2>Password</h2></td> \n";     
+      ptr += "<td></td>\n";
+    ptr += "</tr>\n";
+    ptr += "<tr>\n";
+      ptr += "<td><h3>password</h3></td>\n";
+      ptr += "<td><input type='input' id='password' class='owner' name='password' value='" + (String)password + "'></td>\n";
+      ptr += "<td></td>\n";
+    ptr += "</tr>\n";
+
    ptr += "</table>\n";
 
    ptr += "<h3>really change</h3>\n";
@@ -165,6 +182,11 @@ String ptr = "<!DOCTYPE html> <html>\n";
  
   ptr +="</body>\n";
   ptr +="</html>\n";
+
+    }
+		catch (...)
+		{
+		}
   return ptr;
 }
 
@@ -187,6 +209,8 @@ void refreshData(){
   readData(145, zona3Tel);
   readData(160, zona4Tel);
   readData(175, zona5Tel);
+
+  readData(190, password);
 }
 
 void saveOwnerTelephone(){
@@ -201,11 +225,16 @@ void saveOwnerTelephone(){
 
 void saveCheckBox(String ownercheck, int addressBegin){
 
-  if(ownercheck == "checked"){
-    EEPROM.write(addressBegin, 1);
-  } else{
-    EEPROM.write(addressBegin, 0);
-  }  
+try{
+    if(ownercheck == "checked"){
+      EEPROM.write(addressBegin, 1);
+    } else{
+      EEPROM.write(addressBegin, 0);
+    }  
+  }
+  catch (...)
+  {
+  }
 }
 
 void saveAllCheckbox(){
@@ -227,55 +256,73 @@ void saveUssZona(){
   saveData((String)zona3Tel, 14, 145);
   saveData((String)zona4Tel, 14, 160);
   saveData((String)zona5Tel, 14, 175);
+
+  saveData((String)password, 14, 190);
 }
 
 
 void saveData(String data, int sizeData, int addressBegin){ 
    
-  if(data.length() != 0){
-    if(data.length() < sizeData){
-      sizeData = data.length(); 
-    }
-    if(sizeData > 14){
-      sizeData = 14;
-    }
+  try{
+    if(data.length() != 0){
+      if(data.length() < sizeData){
+        sizeData = data.length(); 
+      }
+      if(sizeData > 14){
+        sizeData = 14;
+      }
 
-    EEPROM.write(addressBegin, (byte)sizeData);
-    for (size_t i = 0; i < sizeData; i++)
-    {            
-      EEPROM.write(addressBegin + 1 + i, (byte)(int)data[i]); 
+      EEPROM.write(addressBegin, (byte)sizeData);
+      for (size_t i = 0; i < sizeData; i++)
+      {            
+        EEPROM.write(addressBegin + 1 + i, (byte)(int)data[i]); 
+      }
+    } else{
+      EEPROM.write(addressBegin, 0);
     }
-  } else{
-    EEPROM.write(addressBegin, 0);
+  }
+  catch (...)
+  {
   }
 }
   
 
 void recordArray(char* array, char* m_array){
-  for (size_t i = 0; i < 14; i++)
-  {
-    m_array[i] = array[i];
-    array[i] = 0;
+
+  try{
+    for (size_t i = 0; i < 14; i++)
+    {
+      m_array[i] = array[i];
+      array[i] = 0;
+    }
+    m_array[13] = 0;
   }
-  m_array[13] = 0;
+  catch (...)
+  {
+  }
 } 
 
 void readData(int addressBegin, char* array){
 
-  int sizeData = (int)EEPROM.read(addressBegin);
-  if(sizeData > 14){
-    sizeData = 14;
-  }
-  int data;
+  try{
+    int sizeData = (int)EEPROM.read(addressBegin);
+    if(sizeData > 14){
+      sizeData = 14;
+    }
+    int data;
 
-  if(sizeData != 0){
-    for (size_t i = 0; i < sizeData; i++)
-      {         
-        data = (int)EEPROM.read(addressBegin + 1 + i);        
-          array[i] = (char)data;
-      }
+    if(sizeData != 0){
+      for (size_t i = 0; i < sizeData; i++)
+        {         
+          data = (int)EEPROM.read(addressBegin + 1 + i);        
+            array[i] = (char)data;
+        }
+    }
+    array[13] = 0; 
   }
-  array[13] = 0;  
+  catch (...)
+  {
+  }
 }
 
   String getChecked(int data){
@@ -284,23 +331,70 @@ void readData(int addressBegin, char* array){
   }
 
 void readCheckBox(){
-  int data = (int)EEPROM.read(91);
-  owner1check = getChecked(data);
 
-  data = (int)EEPROM.read(92);
-  owner2check = getChecked(data);
+  try{
+    int data = (int)EEPROM.read(91);
+    owner1check = getChecked(data);
 
-  data = (int)EEPROM.read(93);
-  owner3check = getChecked(data);
+    data = (int)EEPROM.read(92);
+    owner2check = getChecked(data);
 
-  data = (int)EEPROM.read(94);
-  owner4check = getChecked(data);
+    data = (int)EEPROM.read(93);
+    owner3check = getChecked(data);
 
-  data = (int)EEPROM.read(95);
-  owner5check = getChecked(data);
+    data = (int)EEPROM.read(94);
+    owner4check = getChecked(data);
 
-  data = (int)EEPROM.read(96);
-  owner6check = getChecked(data); 
+    data = (int)EEPROM.read(95);
+    owner5check = getChecked(data);
+
+    data = (int)EEPROM.read(96);
+    owner6check = getChecked(data); 
+  }
+  catch (...)
+  {
+  }
+}
+
+void deleteItem(char* c, int size){
+
+  try{
+    for (int i = 0; i < size; i++)
+    {
+      c[i] = 0;
+    }
+  }
+  catch (...)
+  {
+  }
+}
+
+void deleteAll(){  
+
+  deleteItem(owner1Tel, 14);
+  deleteItem(owner2Tel, 14);
+  deleteItem(owner3Tel, 14);
+  deleteItem(owner4Tel, 14);
+  deleteItem(owner5Tel, 14);
+  deleteItem(owner6Tel, 14);  
+
+  owner1check = "";
+  owner2check = "";
+  owner3check = "";
+  owner4check = "";
+  owner5check = "";
+  owner6check = "";
+
+  deleteItem(ussAc, 8);
+  deleteItem(uss_sumAc, 4);
+
+  deleteItem(zona1Tel, 14);
+  deleteItem(zona2Tel, 14);
+  deleteItem(zona3Tel, 14);
+  deleteItem(zona4Tel, 14);
+  deleteItem(zona5Tel, 14);
+
+  deleteItem(password, 14); 
 }
 
 void setOwner1(char* array){
@@ -357,6 +451,10 @@ void setZona5(char* array){
    recordArray(array, zona5Tel);
 }
 
+void setPassword(char* array){
+   recordArray(array, password);
+}
+
 void setOwnerCheck(state check1, state check2, state check3, state check4, state check5, state check6){
     
     setCheck(check1, owner1check);
@@ -368,13 +466,122 @@ void setOwnerCheck(state check1, state check2, state check3, state check4, state
 }
 
 void setCheck(state check, String &ownercheck){
-  if(check == ON) {
-    ownercheck = "checked";
-  } else if(check == OFF){
-    ownercheck = "";
-  } else{}
+
+  try{
+    if(check == ON) {
+      ownercheck = "checked";
+    } else if(check == OFF){
+      ownercheck = "";
+    } else{}
+  }
+  catch (...)
+  {
+  }
 }
 
+void getOwnerTelephones(std::string* array){
+
+  try{
+    array[0] = (std::string)owner1Tel;
+    array[1] = (std::string)owner2Tel;
+    array[2] = (std::string)owner3Tel;
+    array[3] = (std::string)owner4Tel;
+    array[4] = (std::string)owner5Tel;
+    array[5] = (std::string)owner6Tel;
+  }
+  catch (...)
+  {
+  } 
+}
+
+void getChecks(bool* array){
+  
+  try{
+    array[0] = owner1check == "checked" ? true : false;
+    array[1] = owner2check == "checked" ? true : false;
+    array[2] = owner3check == "checked" ? true : false;
+    array[3] = owner4check == "checked" ? true : false;
+    array[4] = owner5check == "checked" ? true : false;
+    array[5] = owner6check == "checked" ? true : false;
+  }
+  catch (...)
+  {
+  } 
+}
+
+bool getCheck(int index){
+  
+  try{
+    switch (index)
+    {
+      case 0:
+      return owner1check == "checked";
+      case 1:
+      return owner2check == "checked";
+      case 2:
+      return owner3check == "checked";
+      case 3:
+      return owner4check == "checked";
+      case 4:
+      return owner5check == "checked";
+      case 5:
+      return owner6check == "checked";
+    default:
+      break;
+    }
+  }
+  catch (...)
+  {
+  } 
+  return false;
+}
+
+std::string getUssAc(){  
+  return (std::string)ussAc;
+}
+
+bool isNumeric(int c){
+  if(c > 47 && c < 58){
+    return true;
+  }
+  return false;
+}
+
+int getUss_sumAc(){
+  
+  try{
+    for (int i = 0; i < 4; i++)
+    {
+      if(!isNumeric((int)uss_sumAc[i])){
+        return 5;
+      }
+    } 
+    return ((String)uss_sumAc).toInt();
+
+  }
+  catch (...)
+  {
+  } 
+  return 5;
+}
+
+void getZonas(String* array){
+
+  try{
+    array[0] = (String)zona1Tel;
+    array[1] = (String)zona2Tel;
+    array[2] = (String)zona3Tel;
+    array[3] = (String)zona4Tel;
+    array[4] = (String)zona5Tel;
+  }
+  catch (...)
+  {
+  } 
+}
+
+std::string getPassword(){
+  return (std::string)password;
+}
 
 };
 
