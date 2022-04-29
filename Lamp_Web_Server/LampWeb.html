@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web lamp</title>
+    <style>
+        body{margin-top: 20px;background-color: #333;}
+        table {color: #888;margin: 10px auto 30px; text-align: center;} 
+        td {width: 80px; text-align:  center;}
+        h1 {color: #888; margin: 0 50px;}
+        .post {display: block;width: 90px;background-color: #992121;border: none;color: white;padding: 13px 30px;text-decoration: none;font-size: 25px;margin: 0px auto 35px;cursor: pointer;border-radius: 4px;}
+        
+
+    </style>
+</head>
+<body>
+    <div style='margin: auto;'>
+        <form action='/timer' id='colorForm' method='POST'>
+        <table>
+            <tr>   
+                <th><h1>Lamp web control</h1></th>                 
+            </tr> 
+
+            <tr>          
+                <td><div>
+                    <input type='radio' id='lampoff' name='lampp' value='lampoff' checked>
+                    <label for='lampp'>LAMP OFF</label>
+                  </div></td>    
+            </tr>
+            <tr>          
+                <td><div>
+                    <input type='radio' id='lamponn' name='lampp' value='lampon'>
+                    <label for='lampp'>LAMP ON</label>
+                  </div></td>    
+            </tr> 
+
+            <tr>
+                <td><h3>brightness</h3></td>
+            </tr>
+            <tr>
+                <td><input type="range" id="range_brightness" min="0" max="100" step="1" value="100"></td>
+            </tr>
+            <tr>
+                <td><h3>sector</h3></td>
+            </tr>
+            <tr>
+                <td><input type="range" id="range_sector" min="0" max="360" step="1" value="360"></td>
+            </tr>
+            <tr>
+                <td><h3>position</h3></td>
+            </tr>
+            <tr>
+                <td><input type="range" id="range_position" min="0" max="360" step="1" value="0"></td>
+            </tr>
+            <tr>          
+                <td><INPUT TYPE='submit' class='post' VALUE='OK'></td>
+            </tr> 
+            <tr>   
+                <th><h2>choose color</h2></th>                 
+            </tr>
+        </table>
+
+        <table>           
+            <tr>   
+                <td><h3 style="color: #fff;">white</h3></td>
+                <td><h3 style="color: #000;">black</h3></td> 
+                <td><h3 style="color: #00f;">Ukr<span style="color: #ff0;">aine</span></h3></td>
+            </tr>
+            <tr>   
+                <td><input type='radio' id='radio_white' name='rdo_color' value="radio_white" checked></td>
+                <td><input type='radio' id='radio_black' name='rdo_color' value="radio_black"></td>
+                <td><input type='radio' id='radio_ukraine' name='rdo_color' value="radio_ukraine"></td>
+            </tr> 
+            <tr><td></td></tr>
+            <tr><td></td></tr>
+            <tr><td></td></tr>
+            <tr>   
+                <td><h3 style="color: #f00;">red</h3></td>
+                <td><h3 style="color: #0f0;">green</h3></td> 
+                <td><h3 style="color: #00f;">blue</h3></td>
+            </tr>
+            <tr>   
+                <td><input type='radio' id='radio_red' name='rdo_color' value="radio_red"></td>
+                <td><input type='radio' id='radio_green' name='rdo_color' value="radio_green"></td>
+                <td><input type='radio' id='radio_blue' name='rdo_color' value="radio_blue"></td>
+            </tr>
+            <tr><td></td></tr>
+            <tr><td></td></tr>
+            <tr><td></td></tr>
+            <tr>   
+                <td><h3 style="color: #90f;">purple</h3></td>
+                <td><h3 style="color: #0ff;">salad</h3></td> 
+                <td><h3 style="color: #ff0;">yellow</h3></td>
+            </tr>
+            <tr>   
+                <td><input type='radio' id='radio_purple' name='rdo_color' value="radio_purple"></td>
+                <td><input type='radio' id='radio_salad' name='rdo_color' value="radio_salad"></td>
+                <td><input type='radio' id='radio_yellow' name='rdo_color' value="radio_yellow"></td>
+            </tr>
+            <tr>   
+                <td></td>
+                <td><h3>choose</h3></td> 
+                <td></td>
+            </tr>
+            <tr>   
+                <td></td>
+                <td><input type='radio' id='radio_choose' name='rdo_color' value="radio_choose"></td>
+                <td></td>
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <td><h3>red channel</h3></td>
+                <td><div style="background-color: #f00; "><input type="range" id="range_red" min="0" max="255" step="1" value="255"></div></td>
+            </tr>
+            <tr>
+                <td><h3>green channel</h3></td>
+                <td><div style="background-color: #0f0; "><input type="range" id="range_green" min="0" max="255" step="1" value="255"></div></td>
+            </tr>
+            <tr>
+                <td><h3>blue channel</h3></td>
+                <td><div style="background-color: #00f; "><input type="range" id="range_blue" min="0" max="255" step="1" value="255"></div></td>
+            </tr>            
+        </table>
+
+        <table>
+            <tr>
+                <td><h2>choose program</h2></td>
+            </tr>
+            <tr>
+                <td><h3>speed</h3></td>
+            </tr>
+            <tr>
+                <td><input type="range" id="range_speed" min="0" max="100" step="1" value="100"></td>
+            </tr>
+            <tr>          
+                <td><INPUT TYPE='submit' class='post' VALUE='OK'></td>
+            </tr>
+            <tr>          
+                <td><div>
+                    <input type='checkbox' id='saves' name='saves'>
+                    <label for='saves'>Save</label>
+                  </div></td>    
+            </tr>           
+        </table>
+
+        <table>
+            <tr>
+                <td><h3>static</h3></td>
+                <td><h3>rain</h3></td>
+                <td><h3>rainbow</h3></td>
+            </tr>
+            <tr>
+                <td><input type='radio' id='radio_static' name='rdo_program' value="radio_static" checked></td>
+                <td><input type='radio' id='radio_rain' name='rdo_program' value="radio_rain"></td>
+                <td><input type='radio' id='radio_rainbow' name='rdo_program' value="radio_rainbow"></td>
+            </tr>
+            <tr>
+                <td><h3>on_off</h3></td>
+                <td><h3>on_off_color</h3></td>
+                <td><h3>run string</h3></td>
+            </tr>
+            <tr>
+                <td><input type='radio' id='radio_on_off' name='rdo_program' value="radio_on_off"></td>
+                <td><input type='radio' id='radio_on_off_color' name='rdo_program' value="radio_on_off_color"></td>
+                <td><input type='radio' id='radio_run_string' name='rdo_program' value="radio_run_string"></td>
+            </tr>
+            <tr>
+                <td><h3>transfusion</h3></td>
+                <td><h3>multy</h3></td>
+                <td><h3>change</h3></td>
+            </tr>
+            <tr>
+                <td><input type='radio' id='radio_transfusion' name='rdo_program' value="radio_transfusion"></td>
+                <td><input type='radio' id='radio_multy_run' name='rdo_program' value="radio_multy_run"></td>
+                <td><input type='radio' id='radio_change_color' name='rdo_program' value="radio_change_color"></td>
+            </tr>
+        </table>
+
+        </form>
+    </div>
+</body>
+</html>
