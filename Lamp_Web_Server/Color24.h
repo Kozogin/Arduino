@@ -24,7 +24,15 @@ public:
 		m_b = b;
 		m_rotate = 0;
 		m_stepBrighness = 0;
-	}	
+	}
+
+	void copyColor(Color24 &color) {
+		m_r = color.m_r;
+		m_g = color.m_g;
+		m_b = color.m_b;
+		m_rotate = color.m_rotate;
+		m_stepBrighness = color.m_stepBrighness;
+	}
 
 	void chooseColor(ColorLight color, int r, int g, int b){
 
@@ -70,7 +78,8 @@ public:
             break;            
             default:
             break;     
-        }        
+        }  
+		  
     }
 
 	void changeColorRainbow() {
@@ -180,14 +189,22 @@ public:
 		m_b = b;
 	}
 
-	Color24 setBrightnessC(Color24 color, int brightness) {
+	void setBrightnessC(Color24 &color, int brightness) {
 		m_r = brightness * color.m_r / 100;
 		m_g = brightness * color.m_g / 100;
 		m_b = brightness * color.m_b / 100;
-		return Color24(m_r, m_g, m_b);
+
+		if(m_r > 2.55 * brightness){
+			m_r = 0;			
+		}
+		if(m_g > 2.55 * brightness){
+			m_g = 0;
+		}
+		if(m_b > 2.55 * brightness){			
+			m_b = 0;
+		}
 	}
 
-	//Color24  getColor24(){ return ;}
 	int getR() { return m_r; }
 	int getG() { return m_g; }
 	int getB() { return m_b; }

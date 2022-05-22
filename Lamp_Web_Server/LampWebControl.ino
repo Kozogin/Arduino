@@ -80,7 +80,9 @@ void handleRoot()
 void setup()
 { 
   Serial.begin(9600);
-  EEPROM.begin(512);      
+    pinMode(D4, OUTPUT);
+    digitalWrite(D4, HIGH);
+  EEPROM.begin(32);      
     delay(500); 
 	
   WiFi.mode(WIFI_AP_STA);
@@ -98,7 +100,9 @@ void setup()
   pixels = new Adafruit_NeoPixel(NUM_PIXEL, PIN, colorOrder);
   pixels->begin();
   lighter.readFromEeprom();
-  timer2.setInterval(50L, timerLight); 
+  
+  lighter.perfomer();
+  timer2.setInterval(10L, timerLight); 
 }
 
 void timerLight(){
