@@ -71,9 +71,7 @@ void handleRoot()
     strcpy(arrDate,server.arg("saves").c_str());
     lighter.setSaveCheck();      
   }
-
   lighter.perfomer();
-
 }
   
 

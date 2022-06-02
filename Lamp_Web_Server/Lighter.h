@@ -10,7 +10,7 @@ ServiceColor24 serviceColor24 = ServiceColor24();
 #ifdef __AVR__
   #include <avr/power.h>
 #endif
-#define PIN 4
+#define PIN 4 //////5///////////////4
 uint8_t colorOrder = 0x52;
 Adafruit_NeoPixel *pixels;
 int delayval = 2;
@@ -32,7 +32,7 @@ public:
     Lighter(){}
 
     void timeDraining(){
-        if(divider > m_rangeSpeed){            
+        if(divider > 21 - m_rangeSpeed){            
             chooseProgram();
             lightString();
             divider = 0;
@@ -44,11 +44,10 @@ public:
         chooseColor();
         chooseProgram();
         lightString();
-        //m_chkLamp
         if(m_chkLamp){
-            digitalWrite(D4, HIGH);
-        } else {
             digitalWrite(D4, LOW);
+        } else {
+            digitalWrite(D4, HIGH);
         }
         programFirst = STATIC_FIRST;     
     }
@@ -138,8 +137,7 @@ public:
             break;                       
             default:
             break;       
-        }
-                
+        }                
      }
 
    
@@ -171,14 +169,11 @@ public:
             for(Color24 pix : serviceColor24.getListBrightness())
             { 
                 pixels -> setPixelColor(i++, pixels -> Color(pix.getR(), pix.getG(), pix.getB()));
-                //pixels -> setPixelColor(i++, pixels -> Color(255, 127, 0));
             }
         }
         pixels -> show();
         delay(delayval);
-
-    }
- 
+    } 
 
 };
 

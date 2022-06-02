@@ -11,7 +11,6 @@ class ServiceColor24 {
 private:
 	std::list<Color24> m_colorString;
 	std::list<Color24> m_colorStringBrightness;
-	//--------------------------------------------
 	Color24 color24s;
 	Color24 color24choose;
 	Color24 red;
@@ -76,23 +75,28 @@ public:
 	void runString() {
 		m_colorString.clear();		
 		
-		for (size_t i = 0; i < NUM_PIXEL / 6; i++)
+		for (size_t i = 0; i < NUM_PIXEL / 8 + 1; i++)
 		{
 			color24s.setColorC(255, 0, 0);
-			m_colorString.push_back(color24s);
-			color24s.setColorC(0, 255, 0);
 			m_colorString.push_back(color24s);
 			color24s.setColorC(0, 0, 255);
 			m_colorString.push_back(color24s);
 			color24s.setColorC(255, 255, 0);
 			m_colorString.push_back(color24s);
-			color24s.setColorC(0, 0, 0);
+			color24s.setColorC(0, 0, 255);
 			m_colorString.push_back(color24s);
-			color24s.setColorC(0, 0, 0);
+
+			color24s.setColorC(255, 0, 0);
+			m_colorString.push_back(color24s);
+			color24s.setColorC(0, 255, 0);
+			m_colorString.push_back(color24s);
+			color24s.setColorC(255, 255, 0);
+			m_colorString.push_back(color24s);
+			color24s.setColorC(0, 255, 0);
 			m_colorString.push_back(color24s);
 		}
-		color24s.setColorC(0, 0, 0);
-		m_colorString.resize(NUM_PIXEL, color24s);
+		//color24s.setColorC(0, 0, 0);
+		m_colorString.resize(NUM_PIXEL);
 	}
 
 	void multy() {
@@ -117,7 +121,6 @@ public:
 		yellow.transfusionProgram(3);
 
 		m_colorString.clear();
-
 		for (size_t i = 0; i < NUM_PIXEL / 4 + 1; i++)
 		{
 			m_colorString.push_front(red);
@@ -138,8 +141,7 @@ public:
 	void cutPosition(int position, bool reverse) {
 		int step = NUM_PIXEL * position / 360;
 		for (int i = 0; i < step; i++)
-		{
-			
+		{			
 			if (reverse) {
 				color24s.copyColor(m_colorString.front());
 				m_colorString.push_back(color24s);

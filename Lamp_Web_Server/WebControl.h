@@ -78,7 +78,7 @@ ptr +="<body>\n";
                 ptr +="<td><h3>brightness</h3></td>\n";
             ptr +="</tr>\n";
             ptr +="<tr>\n";
-                ptr +="<td><input type='range' id='range_brightness' name='range_brightness' min='0' max='100' step='1' value='" + (String)m_rangeBrightness + "'></td>\n";
+                ptr +="<td><input type='range' id='range_brightness' name='range_brightness' min='0' max='99' step='1' value='" + (String)m_rangeBrightness + "'></td>\n";
             ptr +="</tr>\n";
             ptr +="<tr>\n";
                 ptr +="<td><h3>sector</h3></td>\n";
@@ -460,33 +460,11 @@ void setProgram(char *program){
     
 }
 
-void saveToEeprom(){
-  // Serial.println("saveToEeprom()"); 
-  // Serial.print("m_rangeBrightness  ");
-  // Serial.println(m_rangeBrightness);
-  // Serial.print("m_rangeSector  ");
-  // Serial.println(m_rangeSector);
-  // Serial.print("m_rangeSector  ");
-  // Serial.println(m_rangePosition);
-  // Serial.print("m_rangeRed  ");
-  // Serial.println(m_rangeRed);
-  // Serial.print("m_rangeGreen  ");
-  // Serial.println(m_rangeGreen);
-  // Serial.print("m_rangeBlue  ");
-  // Serial.println(m_rangeBlue);
-  // Serial.print("m_rangeSpeed  ");
-  // Serial.println(m_rangeSpeed);
-
-  Serial.print("m_chkLamp  ");
-  Serial.println(m_chkLamp);
-  Serial.print("m_colorLight  ");
-  Serial.println(m_colorLight);
-  Serial.print("m_programPerfomer  ");
-  Serial.println(m_programPerfomer); 
+void saveToEeprom(){  
 
   EEPROM.write(1, m_rangeBrightness);
-  EEPROM.write(12, m_rangeSector);
-  EEPROM.write(2, m_rangePosition);
+  EEPROM.write(13, m_rangeSector / 2);
+  EEPROM.write(2, m_rangePosition / 2);
   EEPROM.write(3, m_rangeRed);
   EEPROM.write(4, m_rangeGreen);
   EEPROM.write(5, m_rangeBlue);
@@ -507,8 +485,8 @@ void saveToEeprom(){
 void readFromEeprom(){
 
   m_rangeBrightness = (int)EEPROM.read(1);
-  m_rangeSector = (int)EEPROM.read(12);
-  m_rangePosition = (int)EEPROM.read(2);
+  m_rangeSector = 2 * (int)EEPROM.read(13);
+  m_rangePosition = 2 * (int)EEPROM.read(2);
   m_rangeRed = (int)EEPROM.read(3);
   m_rangeGreen = (int)EEPROM.read(4);
   m_rangeBlue = (int)EEPROM.read(5);
@@ -521,30 +499,7 @@ void readFromEeprom(){
   }
 
   m_colorLight = (ColorLight)EEPROM.read(8);
-  m_programPerfomer = (ProgramPerfomer)EEPROM.read(9);
-
-  // Serial.println("readToEeprom()"); 
-  // Serial.print("m_rangeBrightness  ");
-  // Serial.println(m_rangeBrightness);
-  // Serial.print("m_rangeSector  ");
-  // Serial.println(m_rangeSector);
-  // Serial.print("m_rangePosition  ");
-  // Serial.println(m_rangePosition);
-  // Serial.print("m_rangeRed  ");
-  // Serial.println(m_rangeRed);
-  // Serial.print("m_rangeGreen  ");
-  // Serial.println(m_rangeGreen);
-  // Serial.print("m_rangeBlue  ");
-  // Serial.println(m_rangeBlue);
-  // Serial.print("m_rangeSpeed  ");
-  // Serial.println(m_rangeSpeed);
-
-  // Serial.print("m_chkLamp  ");
-  // Serial.println(m_chkLamp);
-  // Serial.print("m_colorLight  ");
-  // Serial.println(m_colorLight);
-  // Serial.print("m_programPerfomer  ");
-  // Serial.println(m_programPerfomer);  
+  m_programPerfomer = (ProgramPerfomer)EEPROM.read(9);   
 
 }
 
