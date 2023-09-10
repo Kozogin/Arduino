@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{margin-top: 20px;background-color: #222;}
+        div, table {color: #ccc; margin: 10px auto 30px; text-align: center; font-size: 30px;}
+        td {width: 80px; text-align:  center; padding: 15px 20px;}
+        h1 {color: #ccc; margin: 0 40px;}
+        #time_zone, #mileage {background: black; color:aliceblue; font-size: 20px; width: 120px;;}
+
+        .post {display: block;width: 90px;background-color: #992121;border: none;color: white;padding: 13px 30px;text-decoration: none;font-size: 25px;margin: 0px auto 35px;cursor: pointer;border-radius: 4px;}
+        
+
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>speedometer control</h1>
+        <br><br>
+        <form action='/' id='mileageForm' method='POST'>
+            <table>
+                <tr>
+                    <td>time zone</td>
+                    <td><input type='number' id='time_zone' name='time_zone'></td>
+                    <td><input type='checkbox' id='time_zone_check' name='time_zone_check'></td>
+                </tr>
+
+                <tr>
+                    <td>mileage</td>
+                    <td><input type='number' id='mileage' name='mileage'></td>
+                    <td><input type='checkbox' id='mileage_check' name='mileage_check'></td>
+                </tr>
+                
+                <tr>
+                    <td>gaz</td>
+                    <td>erase</td>
+                    <td><input type='checkbox' id='gaz_check' name='gaz_check'></td>
+                </tr>
+                
+                <tr>
+                    <td>oil</td>
+                    <td>erase</td>
+                    <td><input type='checkbox' id='oil_check' name='oil_check'></td>
+                </tr>
+                
+            </table>
+            <INPUT TYPE='submit' class='post' VALUE='OK'>
+        </form>
+    </div>
+    
+</body>
+</html>
