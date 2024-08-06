@@ -8,18 +8,24 @@
 #include <SimpleTimer.h>
 #include "ServiceTelegram.h"
 
-#define touthtime 500
 #define PIN_TELEGRAM_OR_WEB 23
 
 ServiceTelegram serviceTelegram;
 SimpleTimer timer;
 
 const char* ssid = "Kolector";
-const char* password = "12345679";
+const char* password = "source221313";
 
 unsigned long wifiRestart;
 unsigned long realTouchtime;
+unsigned long timeButtonRadiatorPool;
+
+int countStatePoolRadiator;
+
 bool telegram0Web1 = false;
+bool statePinPoolRadiator;
+bool previousStatePinPoolRadiator;
+bool nowStatePinPoolRadiator;
 
 WebServer server(80);
 
@@ -28,7 +34,9 @@ void handleRoot() {
 }
 
 void handleRootC2() {
-  
+
+  //Serial.begin(115200);
+  //Serial.println("handleRootC2(){");
   server.send(200, "text/html", serviceTelegram.getPageC2());
   char arrDate[3];
 
@@ -157,6 +165,7 @@ void handleRootC5() {
     }
 
     serviceTelegram.setStatus_5(onManual);
+
     serviceTelegram.saveToEeprom();
   }
 }
@@ -187,6 +196,7 @@ void handleRootC6() {
     }
 
     serviceTelegram.setStatus_6(onManual);
+
     serviceTelegram.saveToEeprom();
   }
 }
@@ -287,12 +297,6 @@ void handleRootOption() {
   }
 }
 
-void onOffPoolRadiator() {
-  if (millis() - realTouchtime > touthtime && millis() > 20000) {
-    serviceTelegram.onOffPoolRadiator();
-    realTouchtime = millis();
-  }
-}
 
 void setup() {
   Serial.begin(9600);
@@ -306,15 +310,19 @@ void setup() {
   pinMode(RELAY_PUMP_4, OUTPUT);
   pinMode(LED_POOL_RADIATOR_ON, OUTPUT);
   pinMode(PIN_TELEGRAM_OR_WEB, INPUT_PULLUP);
+  pinMode(PIN_POOL_RADIATOR_ON, INPUT_PULLUP);
 
   digitalWrite(RELAY_PUMP_4, HIGH);
-  touchAttachInterrupt(T3, onOffPoolRadiator, threshold);
-
+  
   if (digitalRead(PIN_TELEGRAM_OR_WEB)) {
     telegram0Web1 = false;
   } else {
     telegram0Web1 = true;
   }
+
+  delay(500);
+  previousStatePinPoolRadiator = digitalRead(PIN_POOL_RADIATOR_ON);
+  nowStatePinPoolRadiator = previousStatePinPoolRadiator;
 
   sensorContuor_2.begin();
   sensorContuor_3.begin();
@@ -323,7 +331,7 @@ void setup() {
   sensorContuor_6.begin();
   sensorOut.begin();
 
-  delay(5000);
+  
   wifiRestart = 0;
   serviceTelegram.readFromEeprom();
   delay(1000);
@@ -346,6 +354,7 @@ void setup() {
     bot.attach(newMsg);
     serviceTelegram.startTelegram();
   }
+
   
   timer.setInterval(180000L, getTimeTelegram);
 }
@@ -376,9 +385,36 @@ void loop() {
     }
   }
 
+  if(millis() - timeButtonRadiatorPool > 50){
+    statePinPoolRadiator = digitalRead(PIN_POOL_RADIATOR_ON);
+
+    if(statePinPoolRadiator){
+      countStatePoolRadiator++;
+    } else {
+      countStatePoolRadiator--;
+    }
+
+    if(countStatePoolRadiator > 3){
+      countStatePoolRadiator = 3;
+      nowStatePinPoolRadiator = true;
+    }
+    if(countStatePoolRadiator < -3){
+      countStatePoolRadiator = -3;
+      nowStatePinPoolRadiator = false;
+    }
+
+    if(previousStatePinPoolRadiator == !nowStatePinPoolRadiator){
+      serviceTelegram.onOffPoolRadiator();
+      serviceTelegram.saveToEeprom();
+      previousStatePinPoolRadiator = nowStatePinPoolRadiator;
+    }
+
+    timeButtonRadiatorPool = millis();
+  }
+
+
   server.handleClient();
   timer.run();
-  server.handleClient();
   serviceTelegram.logicRelay();
 
   if (wifiRestart > millis()) {
@@ -387,11 +423,11 @@ void loop() {
 }
 
 void connectWiFi() {
-  delay(2000);
-    Serial.println("WIFI_SSID connectWiFi");
-    Serial.println(WIFI_SSID);
-    Serial.println("WIFI_PASS connectWiFi");
-    Serial.println(WIFI_PASS);
+  //delay(2000);
+    //Serial.println("WIFI_SSID connectWiFi");
+    //Serial.println(WIFI_SSID);
+    //Serial.println("WIFI_PASS connectWiFi");
+    //Serial.println(WIFI_PASS);
 
   WiFi.begin(WIFI_SSID, WIFI_PASS);
   while (WiFi.status() != WL_CONNECTED) {

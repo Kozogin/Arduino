@@ -69,11 +69,17 @@ public:
   }
 
   void onOffPoolRadiator() {
-    logicRelayTelegram.onOffPoolRadiator();
+    logicRelayTelegram.onOffPoolRadiator();    
   }
 
   void getTimeTelegram() {
     logicRelayTelegram.onPump();
+    FB_Time t = bot.getTime(dataPropertiesEeprom.getCorrectX());
+
+    if(t.day == 0 || t.month == 0 || t.year == 0){
+      telegramHandler.checkStatusSend();
+      startTelegram();
+    }
   }
 
   void startTelegram() {

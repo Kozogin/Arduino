@@ -3,12 +3,20 @@
 
 #include <FastBot.h>
 #include "DataPropertiesEeprom.h"
-               
-const char* WIFI_SSID;
-const char* WIFI_PASS;
 
-const char* BOT_TOKEN;
-const char* CHAT_ID;
+//#define WIFI_SSID "Dzherelna_22" // sauna
+//#define WIFI_PASS "13131313"    //andriy
+               
+const char* WIFI_SSID;// = "TP-LINK 7ACD84";
+const char* WIFI_PASS;// = "310719822804";
+
+//#define WIFI_SSID "aura karpat 1f"
+//#define WIFI_PASS "a12321456"
+
+const char* BOT_TOKEN;// = "7063178372:AAGEVDowTe3L4-z7PIJX_LPxmkF8p-UL4j4"; //laz
+//#define BOT_TOKEN "6986274135:AAEYV3gKe0FSwvdS-B99m0GSMRP4tdoPaU0" //esp8266V
+//#define BOT_TOKEN "6774882429:AAHu8SVEch1gIiegnq09WN0VvABkg6ul89s"  //aura
+const char* CHAT_ID;// = "1058644725";  //viktor"5099744401"  //roman "806961254"//               i "1058644725"
 
 FastBot bot("1111");
 
@@ -250,6 +258,7 @@ public:
   if (msg.data == "radiator pool") {
     //Serial.println("if (msg.data == radiator pool) {");
     ptrDataProperties->changeOnRadiatorPool();
+    ptrDataProperties->saveToEeprom();
   }
 
   if (msg.data == "type servo 2") {

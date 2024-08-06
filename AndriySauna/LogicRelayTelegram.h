@@ -19,7 +19,7 @@
 #define RELAY_PUMP_4      4
 
 #define LED_POOL_RADIATOR_ON 2
-#define threshold 30  //62  
+#define PIN_POOL_RADIATOR_ON 15
 
 #define FIRST_PWM   140
 #define DELTA       6

@@ -114,6 +114,7 @@ void saveToEeprom(){
   EEPROM.write(210, m_chatId.length());
 
   EEPROM.commit(); 
+  Serial.println("EEPROM.commit(); ");
   
 }
 
@@ -269,7 +270,7 @@ Serial.println("void changeOnRadiatorPool(){");
   } else {
     digitalWrite(LED_POOL_RADIATOR_ON, HIGH);
   }
-  saveToEeprom();
+  /////////////saveToEeprom();
 }
 
 void changeTypeServoNO_2(){
