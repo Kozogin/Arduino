@@ -1,6 +1,3 @@
-// где получить токен и ID https://kit.alexgyver.ru/tutorials/telegram-basic/
-
-//https://github.com/GyverLibs/FastBot/blob/main/examples/menu/menu.ino
 #include <Arduino.h>
 #include <WiFi.h>
 #include <WebServer.h>
